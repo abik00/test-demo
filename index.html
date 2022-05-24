@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar{
+            width: 100%;
+            height: 50px;
+            background-color: rgb(8, 61, 113);
+            margin: auto;
+            margin-bottom: 4%;
+        }
+        body{
+            padding: 5%;
+        }
+        #bat{
+            color: rgb(234, 238, 239);
+            text-align: end;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <h2 id="bat">0</h2>
+    </div>
+    
+ 
+    <button><a href="student.html" >added student</a></button>
+    <form id="student" onsubmit="stud(event)">
+        <span>name</span>
+        <input type="text" id="name" placeholder="name"><br>
+        <br>
+        <span>course</span>
+        <input type="text" id="course" placeholder="course"><br>
+        <br>
+        <span>unit</span>
+        <input type="number" id="unit" placeholder="unit"><br>
+        <br>
+        <span>image</span>
+        <input type="text" id="image" placeholder="image"><br>
+        <br>
+        <span>batch</span>
+        <input type="text" id="batch" placeholder="batch">
+        <input type="submit" value="add" id="add">
+    </form>
+</body>
+</html>
+<script>
+    let arr=JSON.parse(localStorage.getItem('database')) ||[]
+    function bat(n,c,u,i,b){
+        this.name=n;
+        this.course=c;
+        this.unit=u;
+        this.image=i;
+        this.batch=b;
+    }
+    function stud(){
+    event.preventDefault();
+    let form=document.getElementById("student");
+    
+    let name=form.name.value; 
+    let course=form.course.value;
+    let unit=form.unit.value;
+    let image=form.image.value;
+    let batch=form.batch.value;
+    
+    let p1=new bat(name,course,unit,image,batch);
+
+
+
+    arr.push(p1)
+    console.log(p1)
+
+    localStorage.setItem("database", JSON.stringify(arr))
+   
+    }
+    let x=arr.length;
+    document.getElementById("bat").innerText=`batch:${x}`
+
+</script>

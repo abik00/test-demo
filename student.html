@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display: grid;
+            grid-template-columns: repeat(3,300px);
+            text-align: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <button><a href="index.html">enter the student details</a></button>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+let detail=JSON.parse(localStorage.getItem("database"))
+detail.forEach(function (event,index){
+    let div=document.createElement('div')
+
+    let name=document.createElement('h2')
+    name.innerText=event.name;
+
+    let course=document.createElement('h2')
+    course.innerText=`course:${event.course}`;
+
+    let unit=document.createElement('h2')
+    unit.innerText=`unit:${event.name}`;
+
+    let image=document.createElement('img')
+    image.src=event.image;
+
+    let batch=document.createElement('h2')
+    batch.innerText=`batch:${event.name}`;
+
+    let button=document.createElement("button");
+    button.innerHTML="Remove"
+
+    div.append(name,course,unit,image,batch,button)
+    document.querySelector("#container").append(div)
+
+   
+
+    button.addEventListener("click",function(){
+        removeItem(event,index);
+        location.reload();
+    })
+
+
+})
+function removeItem(ele,index){
+    detail.splice(index,1)
+    localStorage.setItem("database",JSON.stringify(detail))
+}
+
+
+</script>
